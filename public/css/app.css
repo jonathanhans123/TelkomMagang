@@ -1,0 +1,151 @@
+.container-fluid{
+    padding: 0px;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+}
+.container-fluid.listhost{
+    padding: 0px;
+    width: 100%;
+    height: 100vh;
+    position: static;
+    z-index: 0;
+    background-color: #EF0808;
+}
+.top{
+    height: 70vh;
+    background-color: white;
+}
+.bottom{
+    height: 30vh;
+    background-color: #EF0808;
+}
+.card{
+    z-index: 2;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px 1px;
+    background-color: white;
+    border: none;
+    border-radius: 0px;
+    padding:20px;
+}
+.info{
+    position:absolute;
+    bottom: 10%;
+    left: 80px;
+    width: 250px;
+    height: auto;
+}
+.search{
+    position:absolute;
+    top: 20%;
+    left: 55%;
+    width:40%;
+    height: auto;
+}
+.banner{
+    position:absolute;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px 1px;
+    top: 15vh;
+    bottom: 15vh;
+    left: 10vw;
+    width: 80vw;
+    height: 70vh;
+    object-fit: cover;
+}
+.search2 {
+    display: flex;
+}
+.searchTerm {
+    width: 90%;
+    border: 3px solid #EF0808;
+    border-right: none;
+    padding: 10px;
+    height: 36px;
+    outline: none;
+    color: black;
+}
+.searchTerm:focus{
+    color: black;
+}
+.searchButton {
+    width: 40px;
+    height: 36px;
+    border: 1px solid #EF0808;
+    background: #EF0808;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
+}
+.wrap{
+    transform: translate(-50%, -50%);
+}
+
+.form-check-input:checked{
+    background-color:#EF0808;
+    border-color:#EF0808;
+}
+.grid-container,.grid-container2{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+.grid-container{
+    grid-gap: 4px;
+}
+.grid-container2{
+    grid-gap: 5px;
+}
+input[type="number"]{
+    width: 70px;
+    margin-left:10px;
+}
+.form-group label{
+    text-align: center;
+    line-height: 35px;
+}
+form .btn-danger{
+    margin-top: 10px;
+    border-radius: 0px;
+    float: right;
+    background-color: #EF0808;
+    width: 200px;
+    height: 45px;
+}
+.nav-item{
+    float: right;
+}
+.nav-link:hover{
+    color: #a50606;
+}
+.container-fluid .container{
+    background-color: white;
+    height: 100%;
+    box-shadow: -10px 0 10px -10px grey, 10px 0 10px -10px grey;
+    padding: 20px;
+    overflow-y: scroll;
+}
+.container{
+    background-color: white;
+}
+.cardbehind{
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px 1px;
+    background-color: red;
+    border: none;
+    border-radius: 0px;
+    position: absolute;
+}
+.btn.btn-detail{
+    background-color: rgb(73, 73, 73);
+    color: white;
+}
+.tabledetail tbody tr td{
+    padding-right:30px;
+}
+
+h2{
+    color:red;
+    margin-top: 50px;
+}
