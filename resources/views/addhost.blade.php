@@ -1,7 +1,7 @@
 @extends("adminlayout")
 
 @section("content")
-<div class="container-fluid" style="margin-top:120px;background-color:rgb(176, 0, 0);height:calc(100% - 120px);">
+<div class="container-fluid" style="margin-top:120px;;height:calc(100% - 120px);background-image: url({{asset("images/background.jpg")}});background-repeat:no-repeat;background-size:cover;;">
     <div class="container" style="width:60%;">
         <form action="/host/add" method="post">
             @csrf

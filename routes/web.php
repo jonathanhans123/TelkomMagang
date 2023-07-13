@@ -13,13 +13,17 @@ use App\Http\Controllers\AdminController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', [AdminController::class,'AdminSearchHost']);
-Route::get('/search', [AdminController::class,'AdminSearch']);
-Route::get('/host/list',[AdminController::class,'AdminHostList']);
-Route::get('/host/add',[AdminController::class,'AdminHostAdd']);
-Route::post('/host/add',[AdminController::class,'doAdminHostAdd']);
-Route::get('/host/detail/{id}',[AdminController::class,'AdminHostDetail']);
-Route::get('/host/detail/edit/{id}',[AdminController::class,'AdminHostEdit']);
-Route::post('/host/detail/edit/{id}',[AdminController::class,'doAdminHostEdit']);
-Route::get('/host/detail/internet/detail/{id}/{onuid}',[AdminController::class,'AdminInternetDetail']);
+Route::get('/', [AdminController::class,'Login']);
+Route::post('/', [AdminController::class,'doLogin']);
+Route::get('/logout', [AdminController::class,'Logout']);
+Route::middleware(['cekLogin'])->group(function () {
+    Route::get('/host', [AdminController::class,'AdminSearchHost']);
+    Route::get('/search', [AdminController::class,'AdminSearch']);
+    Route::get('/host/list',[AdminController::class,'AdminHostList']);
+    Route::get('/host/add',[AdminController::class,'AdminHostAdd']);
+    Route::post('/host/add',[AdminController::class,'doAdminHostAdd']);
+    Route::get('/host/detail/{id}',[AdminController::class,'AdminHostDetail']);
+    Route::get('/host/detail/edit/{id}',[AdminController::class,'AdminHostEdit']);
+    Route::post('/host/detail/edit/{id}',[AdminController::class,'doAdminHostEdit']);
+    Route::get('/host/detail/internet/detail/{id}/{onuid}',[AdminController::class,'AdminInternetDetail']);
+});

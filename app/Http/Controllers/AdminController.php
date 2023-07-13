@@ -4,18 +4,55 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DataHost;
+use App\Models\User;
 use App\Models\DataInet;
 use App\Models\DetailOdp;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Session;
 
 
 class AdminController extends Controller
 {
+    public function Logout(){
+        Session::forget('cekuser');
+        return redirect('/');
+    }
+    public function Login(){
+        Session::forget('cekuser');
+        return view('login');
+    }
+    public function doLogin(Request $request){
+        $validator = Validator::make($request->all(), [
+            'username' => 'required',
+            'password' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $user = User::where('username',$request->username)->first();
+
+        if ($user == null){
+            return redirect()
+            ->back()
+            ->withErrors(["error"=>"Username tidak terdaftar"])
+            ->withInput();
+        }
+        if ($user->password != $request->password){
+            return redirect()
+            ->back()
+            ->withErrors(["error"=>"Password salah!"])
+            ->withInput();
+        }
+        Session::put('cekuser',"cekuser");
+        return redirect("/host");
+    }
     public function AdminSearchHost(){
         return view('searchhost');
     }
-
 
     public function AdminSearch(Request $request){
         $keyword = $request->input("keyword");

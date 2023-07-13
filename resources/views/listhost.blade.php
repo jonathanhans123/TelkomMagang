@@ -5,11 +5,13 @@
 @endsection
 
 @section("content")
-<div class="container-fluid" style="margin-top:120px;background-color:rgb(176, 0, 0);height:calc(100% - 120px);">
+<div class="container-fluid" style="margin-top:120px;;height:calc(100% - 120px);background-image: url({{asset("images/background.jpg")}});background-repeat:no-repeat;background-size:cover;;">
+
     <div class="container" style="width:60%">
         @if(count($DataHost)>0)
         <div class="alert alert-success">Berhasil ditemukan {{count($DataHost)}} data yang sesuai</div>
         @endif
+
         <table id="myTable" class="table" style="z-index:2;text-align:center;">
             <thead>
             <tr>
