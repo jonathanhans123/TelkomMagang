@@ -113,7 +113,7 @@
                             }
                         ?>
                         @if($exist)
-                        <a href="{{url("host/detail/internet/detail/$data->no/".$data->{'onu-id'})}}"><input type="button" value="Detail" class="btn btn-detail"></a>
+                        <a href="{{url("host/detail/internet/detail/$DataHost->no/".$data->{'onu-id'})}}"><input type="button" value="Detail" class="btn btn-detail"></a>
                         @else
                         Tidak ada Data Internet
                         @endif

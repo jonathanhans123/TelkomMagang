@@ -55,62 +55,99 @@ class AdminController extends Controller
     }
 
     public function AdminSearch(Request $request){
-        $keyword = $request->input("keyword");
+        $param = [];
         $kolom = $request->input("kolom",[]);
-        if ($request->input("search")!="Advanced Search"){
-            if ($keyword==""){
-                return redirect()->back()->withErrors(['error' => 'Keyword harus diiisi.']);
-            }
 
-            $param = [];
-            $query = DataHost::query();
-            foreach($kolom as $k => $value){
-                $query->where($value,'LIKE',"%{$keyword}%");
-            }
-            $param["DataHost"] = $query->get();
-        }else{
-            $slot = $request->input("slot");
-            $port = $request->input("port");
-            $easlot = $request->input("ea-slot");
-            $eaport = $request->input("ea-port");
-            $oaslot = $request->input("oa-slot");
-            $oaport = $request->input("oa-port");
-            if ($keyword==""||
-                ($slot==""&&$port==""&&
-                $easlot==""&&$eaport==""&&
-                $oaslot==""&&$oaport=="")){
-                    return redirect()->back()->withErrors(['error' => 'Keyword dan salah satu slot atau port harus diiisi.']);
+        $rules = [
+            'kolom' => 'required',
+        ];
 
-            }
-
-            $param = [];
-            $query = DataHost::query();
-            foreach($kolom as $k => $value){
-                $query->where($value,'LIKE',"%{$keyword}%");
-            }
-
-            if ($slot!=""){
-                $query->where("slot",$slot);
-            }
-            if ($port!=""){
-                $query->where("port",$port);
-            }
-            if ($easlot!=""){
-                $query->where("ea-slot",$easlot);
-            }
-            if ($eaport!=""){
-                $query->where("ea-port",$eaport);
-            }
-            if ($oaslot!=""){
-                $query->where("oa-slot",$oaslot);
-            }
-            if ($oaport!=""){
-                $query->where("oa-port",$oaport);
-            }
-
-            $param["DataHost"] = $query->get();
+        $validatedData = $request->validate($rules);
+        $query = DataHost::query();
+        if (in_array('hostname',$kolom)){
+            $request->validate([
+                'keywordhostname' => ["required"],
+            ]);
+            $query->where('hostname','LIKE',"%$request->keywordhostname%");
         }
+        if (in_array('label-odc',$kolom)){
+            $request->validate([
+                'keywordlabel-odc' => ["required"],
+            ]);
+            $query->where('label-odc','LIKE',"%$request->{'keywordlabel-odc'}%");
+        }
+        if (in_array('ea-rack',$kolom)){
+            $request->validate([
+                'keywordea-rack' => ["required"],
+            ]);
+            $query->where('ea-rack','LIKE',"%$request->{'keywordea-rack'}%");
+        }
+        if (in_array('oa-rack',$kolom)){
+            $request->validate([
+                'keywordoa-rack' => ["required"],
+            ]);
+            $query->where('oa-rack','LIKE',"%$request->{'keywordoa-rack'}%");
+        }
+        // dd($query);
+        $param["DataHost"] = $query->get();
+
         return view('listhost',$param);
+
+        // $keyword = $request->input("keyword");
+        // $kolom = $request->input("kolom",[]);
+        // if ($request->input("search")!="Advanced Search"){
+        //     if ($keyword==""){
+        //         return redirect()->back()->withErrors(['error' => 'Keyword harus diiisi.']);
+        //     }
+
+        //     $param = [];
+        //     $query = DataHost::query();
+        //     foreach($kolom as $k => $value){
+        //         $query->where($value,'LIKE',"%{$keyword}%");
+        //     }
+        //     $param["DataHost"] = $query->get();
+        // }else{
+        //     $slot = $request->input("slot");
+        //     $port = $request->input("port");
+        //     $easlot = $request->input("ea-slot");
+        //     $eaport = $request->input("ea-port");
+        //     $oaslot = $request->input("oa-slot");
+        //     $oaport = $request->input("oa-port");
+        //     if ($keyword==""||
+        //         ($slot==""&&$port==""&&
+        //         $easlot==""&&$eaport==""&&
+        //         $oaslot==""&&$oaport=="")){
+        //             return redirect()->back()->withErrors(['error' => 'Keyword dan salah satu slot atau port harus diiisi.']);
+
+        //     }
+
+        //     $param = [];
+        //     $query = DataHost::query();
+        //     foreach($kolom as $k => $value){
+        //         $query->where($value,'LIKE',"%{$keyword}%");
+        //     }
+
+        //     if ($slot!=""){
+        //         $query->where("slot",$slot);
+        //     }
+        //     if ($port!=""){
+        //         $query->where("port",$port);
+        //     }
+        //     if ($easlot!=""){
+        //         $query->where("ea-slot",$easlot);
+        //     }
+        //     if ($eaport!=""){
+        //         $query->where("ea-port",$eaport);
+        //     }
+        //     if ($oaslot!=""){
+        //         $query->where("oa-slot",$oaslot);
+        //     }
+        //     if ($oaport!=""){
+        //         $query->where("oa-port",$oaport);
+        //     }
+
+        //     $param["DataHost"] = $query->get();
+        // }
     }
     public function AdminHostList(Request $request){
         $param = [];
