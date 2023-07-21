@@ -101,6 +101,15 @@
                         @enderror
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <h5 style="opacity:60%;">Label Feeder</h5>
+                        <input type="text" name="label-feeder" id="" class="form-control" value="{{old('label-feeder')}}">
+                        @error('label-feeder')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </td>
+                </tr>
             </table>
             <input type="submit" value="Confirm" class="btn btn-danger">
         </form>

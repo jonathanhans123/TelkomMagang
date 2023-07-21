@@ -71,17 +71,24 @@
                     <h4>{{$DataHost->{'oa-otb'} }}</h4>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <h5 style="opacity:60%;">Label Feeder</h5>
+                    <h4>{{$DataHost->{'label-feeder'} }}</h4>
+                </td>
+            </tr>
         </table>
         <table id="myTable" class="table" style="text-align:center;">
             <thead>
             <tr>
                 <th>No</th>
                 <th>ONU ID</th>
-                <th>Serial Number</th>
-                <th>Status</th>
                 <th>Nama ODP</th>
+                <th>Status</th>
+                <th>Serial Number</th>
+                <th>Data Internet</th>
                 <th style="width:50px;">Port ODP</th>
-                <th>Action</th>
+
             </tr>
             </thead>
             <tbody>
@@ -89,7 +96,7 @@
                 <tr>
                     <td>{{$data->no}}</td>
                     <td>{{$data->{'onu-id'} }}</td>
-                    <td>{{$data->{'onu-sn'} }}</td>
+                    <td>{{$data->{'nama-odp'} }}</td>
                     <td>
                         <?php
                             if($data->{'onu-status'}=="ONLINE"){
@@ -101,23 +108,25 @@
                             }
                         ?>
                     </td>
-                    <td>{{$data->{'nama-odp'} }}</td>
-                    <td>{{$data->{'port-odp'} }}</td>
+                    <td>{{$data->{'onu-sn'} }}</td>
                     <td>
                         <?php
                             $exist = false;
+                            $email = "";
                             foreach($DataInet as $inet){
                                 if ($inet->{'onu-id'}==$data->{'onu-id'} ){
                                     $exist = true;
+                                    $email = $inet->inet;
                                 }
                             }
                         ?>
                         @if($exist)
-                        <a href="{{url("host/detail/internet/detail/$DataHost->no/".$data->{'onu-id'})}}"><input type="button" value="Detail" class="btn btn-detail"></a>
+                        {{$email}}
                         @else
                         Tidak ada Data Internet
                         @endif
                     </td>
+                    <td>{{$data->{'port-odp'} }}</td>
                 </tr>
                 @empty
                 @endforelse

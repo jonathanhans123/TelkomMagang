@@ -88,6 +88,12 @@ class AdminController extends Controller
             ]);
             $query->where('oa-rack','LIKE',"%$request->{'keywordoa-rack'}%");
         }
+        if (in_array('label-feeder',$kolom)){
+            $request->validate([
+                'keywordlabel-feeder' => ["required"],
+            ]);
+            $query->where('label-feeder','LIKE',"%$request->{'keywordlabel-feeder'}%");
+        }
         // dd($query);
         $param["DataHost"] = $query->get();
 
@@ -179,6 +185,7 @@ class AdminController extends Controller
             'oa-slot' => 'required|integer',
             'oa-port' => 'required|integer',
             'oa-otb' => 'required|max:5',
+            'label-feeder' => 'required|max:19',
         ]);
         if ($validator->fails()) {
             return redirect()
@@ -199,6 +206,7 @@ class AdminController extends Controller
         $host->{'oa-slot'} = $request->input('oa-slot');
         $host->{'oa-port'} = $request->input('oa-port');
         $host->{'oa-otb'} = $request->input('oa-otb');
+        $host->{'label-feeder'} = $request->input('label-feeder');
         $host->{'jumlah-pelanggan'} = 0;
 
         // Save the new host

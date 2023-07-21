@@ -28,5 +28,6 @@ class DataHost extends Model
         'oa-slot',
         'oa-port',
         'jumlah-pelanggan',
+        'label-feeder',
     ];
 }

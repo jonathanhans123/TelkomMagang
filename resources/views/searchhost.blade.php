@@ -107,6 +107,28 @@
                     </td>
                 </tr>
                 @enderror
+                <tr>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input disabled" type="checkbox" name="kolom[]" value="label-feeder" onchange="toggleInput(this, 'keywordlabel-feeder')">
+                            <label class="form-check-label">
+                            Label Feeder
+                            </label>
+                        </div>
+                    </td>
+                    <td style="width: 70%;padding-left:4%;">
+                        <div class="search2">
+                            <input type="text" disabled name="keywordlabel-feeder" class="searchTerm disabled" placeholder="Masukkan OA Rack">
+                        </div>
+                    </td>
+                </tr>
+                @error('keywordlabel-feeder')
+                <tr>
+                    <td colspan="2">
+                        <div class="alert alert-danger" >{{$message}}</div>
+                    </td>
+                </tr>
+                @enderror
             </table>
             {{-- <div class="search2">
                 <input type="text" name="keyword" class="searchTerm" placeholder="Masukkan keyword">
